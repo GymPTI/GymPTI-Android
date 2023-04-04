@@ -1,2 +1,3 @@
 # GymPTI-Android
-GymPTI-Android ㅇ^ㅇ
+GymPTI-Android
+AndroidStudio 2022.1.1 Electric Eel
