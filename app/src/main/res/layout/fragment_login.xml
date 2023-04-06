@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.Fragment.LoginFragment">
+    tools:context=".login.Fragment.LoginFragment"
+    android:background="@color/background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -24,7 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3" />
+            app:layout_constraintVertical_bias="0.25" />
 
         <TextView
             android:id="@+id/loginText"
@@ -53,7 +54,8 @@
                 android:id="@+id/loginIdTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="10dp"
                 android:text="아이디"
                 android:textSize="15dp" />
 
@@ -77,13 +79,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loginId"
-            app:layout_constraintVertical_bias="0.02">
+            app:layout_constraintVertical_bias="0.03">
 
             <TextView
                 android:id="@+id/loginPwTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="10dp"
                 android:text="비밀번호"
                 android:textSize="15dp" />
 
@@ -92,9 +95,10 @@
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:background="@drawable/edit_style"
-                android:hint=" 비밀번호를 입력해주세요."
+                android:hint="  비밀번호를 입력해주세요."
                 android:textColorHint="@color/gray"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:elevation="10dp"/>
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -110,9 +114,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loginPw"
-            app:layout_constraintVertical_bias="0.02" />
+            app:layout_constraintVertical_bias="0.1"/>
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -126,18 +131,44 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="계정이 없으신가요?"
-                android:textColor="@color/black"
                 android:textSize="14dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
+                android:background="#00ff0000"
                 android:text="회원가입"
                 android:textColor="@color/purple"
                 android:textSize="14dp"
-                android:textStyle="bold"
-                android:background="#00ff0000"/>
+                android:textStyle="bold" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintVertical_bias="0">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="엇, 혹시 비밀번호를 깜빡하셨나요?"
+                android:textSize="14dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="#00ff0000"
+                android:text="비밀번호 찾기"
+                android:textColor="@color/purple"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
