@@ -117,7 +117,7 @@
             app:layout_constraintVertical_bias="0.1"/>
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/signUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -128,12 +128,14 @@
             app:layout_constraintVertical_bias="0.1">
 
             <TextView
+                android:id="signUpTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="계정이 없으신가요?"
                 android:textSize="14dp" />
 
             <Button
+                android:id="@+id/signUpBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:background="#00ff0000"
@@ -144,8 +146,10 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/findPw"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="116dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -154,12 +158,14 @@
             app:layout_constraintVertical_bias="0">
 
             <TextView
+                android:id="@id/findPwTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="엇, 혹시 비밀번호를 깜빡하셨나요?"
                 android:textSize="14dp" />
 
             <Button
+                android:id="@+id/findPwBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:background="#00ff0000"
