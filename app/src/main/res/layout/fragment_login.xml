@@ -128,7 +128,7 @@
             app:layout_constraintVertical_bias="0.1">
 
             <TextView
-                android:id="signUpTv"
+                android:id="@+id/signUpTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="계정이 없으신가요?"
@@ -154,11 +154,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="0">
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.2">
 
             <TextView
-                android:id="@id/findPwTv"
+                android:id="@+id/findPwTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="엇, 혹시 비밀번호를 깜빡하셨나요?"

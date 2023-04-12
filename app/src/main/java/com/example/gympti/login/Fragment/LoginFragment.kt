@@ -35,7 +35,7 @@ class LoginFragment : AppCompatActivity() {
             val pw = pwEdit.text.toString().trim()
 
             //회원가입 때 받은 값 땡겨오기
-            val sharedPreference = getSharedPreferences("signUp", Context.MODE_PRIVATE)
+            val sharedPreference = getSharedPreferences("signUp", 0)
             val haveID = sharedPreference.getString("id", "")
             val havePw = sharedPreference.getString("pw", "")
 
@@ -46,7 +46,7 @@ class LoginFragment : AppCompatActivity() {
             else {
                 //입력 값이랑 회원가입 값이랑 비교
                 if (id == haveID && pw == havePw){
-                    Toast.makeText(applicationContext, "로그인 성공.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "로그인 성공", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, StartFragment::class.java)
                     startActivity(intent)
                 }
@@ -64,39 +64,3 @@ class LoginFragment : AppCompatActivity() {
 
     }
 }
-
-
-
-
-/*
-* // 로그인 버튼
-        btn_login.setOnClickListener {
-
-            //editText로부터 입력된 값을 받아온다
-            var id = edit_id.text.toString()
-            var pw = edit_pw.text.toString()
-
-            // 쉐어드로부터 저장된 id, pw 가져오기
-            val sharedPreference = getSharedPreferences("file name", Context.MODE_PRIVATE)
-            val savedId = sharedPreference.getString("id", "")
-            val savedPw = sharedPreference.getString("pw", "")
-
-            // 유저가 입력한 id, pw값과 쉐어드로 불러온 id, pw값 비교
-            if(id == savedId && pw == savedPw){
-                // 로그인 성공 다이얼로그 보여주기
-                dialog("success")
-            }
-            else{
-                // 로그인 실패 다이얼로그 보여주기
-                dialog("fail")
-            }
-        }
-
-        // 회원가입 버튼
-        btn_register.setOnClickListener {
-            val intent = Intent(this, Register::class.java)
-            startActivity(intent)
-        }
-
-    }
-* */

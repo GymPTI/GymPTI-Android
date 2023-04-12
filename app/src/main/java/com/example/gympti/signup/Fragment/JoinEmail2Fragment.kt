@@ -1,11 +1,8 @@
-package com.example.gympti
+package com.example.gympti.signup.Fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import com.example.gympti.R
 
 class JoinEmail2Fragment : AppCompatActivity() {
 

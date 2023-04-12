@@ -27,7 +27,7 @@ class JoinNameFragment  : AppCompatActivity() {
                 Toast.makeText(applicationContext, "입력해주세요.", Toast.LENGTH_SHORT).show()
             }
             else {
-                val sharedPreference = getSharedPreferences("login", 0 ) //쉐어드 프리퍼런스 : 쉐어드 명 : 로그인 형태 : private
+                val sharedPreference = getSharedPreferences("signUp", 0 ) //쉐어드 프리퍼런스 : 쉐어드 명 : 로그인 형태 : private
                 val editor = sharedPreference.edit()
                 editor.putString("name", name)
                 editor.apply()
