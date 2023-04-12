@@ -41,8 +41,7 @@ class JoinIdFragment  : AppCompatActivity() {
         }
 
         reBtn.setOnClickListener(){
-            val intent = Intent(this, LoginFragment::class.java)
-            startActivity(intent)
+            setContentView(R.layout.fragment_join_id)
         }
 
     }
