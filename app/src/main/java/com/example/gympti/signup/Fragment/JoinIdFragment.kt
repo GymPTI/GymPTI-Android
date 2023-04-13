@@ -27,7 +27,7 @@ class JoinIdFragment  : Fragment() {
     ): View? {
         mBinding = FragmentJoinIdBinding.inflate(inflater, container, false)
         joinId()
-        returnView()
+        beforeView()
         return binding.root
 //        return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -46,7 +46,7 @@ class JoinIdFragment  : Fragment() {
         }
     }
 
-    private fun returnView() {
+    private fun beforeView() {
         binding.JoinReBtnId.setOnClickListener(){
 
         }
