@@ -16,6 +16,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
 import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.JsonRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.gympti.R
@@ -23,6 +26,9 @@ import com.example.gympti.StartFragment
 import com.example.gympti.databinding.ActivityMainBinding
 import com.example.gympti.databinding.FragmentLoginBinding
 import com.example.gympti.signup.Fragment.JoinIdFragment
+import com.google.gson.JsonObject
+import org.json.JSONException
+import org.json.JSONObject
 import com.example.gympti.login.Fragment.LoginFragment as LoginFragment1
 
 
@@ -46,10 +52,12 @@ class LoginFragment : Fragment() {
 
 
     private fun init() {
+        requestQueue = Volley.newRequestQueue(context)
         binding.loginBtn.setOnClickListener{
 
             val id = binding.loginIdEdit.text.toString().trim()
             val pw = binding.loginPwEdit.text.toString().trim()
+            send()
 
             //회원가입 때 받은 값 땡겨오기
 //            val sharedPreference = getSharedPreferences("signUp", 0)
@@ -68,8 +76,8 @@ class LoginFragment : Fragment() {
         }
     }
     private fun joinView() {
-
         binding.signUpBtn.setOnClickListener(){
+// 프래그 먼트 바꿔줌
 
         }
     }
@@ -77,27 +85,35 @@ class LoginFragment : Fragment() {
     companion object{
         var requestQueue: RequestQueue?=null //여기!
     }
-    fun send(){
-        val request=object: StringRequest(
-            Request.Method.GET,
-            "http://10.10.10.10:8080/login",
-            {
-                "id=test"
-            },
-            {
-                "pw=testpw"
+
+
+    fun send() {
+
+        var url = "http://veryhotseo81.duckdns.org:8888/gympti/auth/register"
+        val email = binding.loginIdEdit.text.toString().trim()
+
+        var sendData = JSONObject("{\"email\":\""+email + "\"}")
+
+        sendData.put("userId", binding.loginIdEdit.text.toString().trim());
+        sendData.put("userName", "홍길동");
+        sendData.put("email", "jogayeon1214@naver.com");
+        sendData.put("password", binding.loginPwEdit.text.toString().trim());
+
+
+        Log.d("LoginFragment", "sendData"+sendData)
+        val request = JsonObjectRequest(
+            Request.Method.POST,
+            url,
+            sendData,
+            Response.Listener{ response ->
+                try{
+                    Log.d("LoginFragment", response.toString());
+            } catch (e: JSONException){
+                e.printStackTrace()
             }
+       }, Response.ErrorListener {  }
+    )
 
-        ){
-            override fun getParams():MutableMap<String,String>{
-                val params=HashMap<String,String>()
-                params["userid"]="john"
-
-                return params
-            }
-        }
-
-        request.setShouldCache(false)
         requestQueue?.add(request)
     }
 

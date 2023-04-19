@@ -2,6 +2,7 @@ package com.example.gympti.signup.Fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +11,16 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.example.gympti.R
 import com.example.gympti.databinding.FragmentJoinIdBinding
 import com.example.gympti.databinding.FragmentLoginBinding
 import com.example.gympti.login.Fragment.LoginFragment
+import org.json.JSONException
+import org.json.JSONObject
 
 class JoinIdFragment  : Fragment() {
 
@@ -27,7 +34,7 @@ class JoinIdFragment  : Fragment() {
     ): View? {
         mBinding = FragmentJoinIdBinding.inflate(inflater, container, false)
         joinId()
-        beforeView()
+        returnView()
         return binding.root
 //        return super.onCreateView(inflater, container, savedInstanceState)
     }
@@ -35,24 +42,58 @@ class JoinIdFragment  : Fragment() {
 
     private fun joinId() {
         binding.joinIdBtn.setOnClickListener(){
-            val id = binding.joinIdMsg.text.toString().trim()
+            var id = binding.joinIdMsg.text.toString().trim()
 
             if(id.isEmpty() == true){
                 Toast.makeText(context,"아이디를 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
             else{
-//                아이디 입력 받고 토스트 띄우고 다음화면
+//                아이디 입력 받고, 중복확인, 토스트 띄우고 다음화면
             }
         }
     }
 
-    private fun beforeView() {
+    private fun returnView() {
         binding.JoinReBtnId.setOnClickListener(){
 
-        }
-    }
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
+        }
+        }
+
+fun register() {
+
+    var url = "http://veryhotseo81.duckdns.org:8888/gympti/auth/register"
+    val email = binding.joinId.text.toString().trim()
+
+    var sendData = JSONObject("{\"email\":\""+email + "\"}")
+
+//    sendData.put("email", binding.joinIdMsg.text.toString().trim());
+    sendData.put("userId", binding.joinId.text.toString().trim());
+    sendData.put("userName", "조가연");
+    sendData.put("email", "jogayeon1214@naver.com");
+
+
+    Log.d("LoginFragment", "sendData"+sendData)
+    val request = JsonObjectRequest(
+        Request.Method.POST,
+        url,
+        sendData,
+        Response.Listener{ response ->
+            try{
+                Log.d("LoginFragment", response.toString());
+            } catch (e: JSONException){
+                e.printStackTrace()
+            }
+        }, Response.ErrorListener {  }
+    )
+
+    LoginFragment.requestQueue?.add(request)
+}}
+
+
+
+
+//    override fun onCreate(savedInstanceState: Bundle?) {                                                                                                          d++++++
 //        super.onCreate(savedInstanceState)
 //        setContentView(R.layout.fragment_join_id)
 //
@@ -86,4 +127,3 @@ class JoinIdFragment  : Fragment() {
 //        }
 //
 //    }
-}
