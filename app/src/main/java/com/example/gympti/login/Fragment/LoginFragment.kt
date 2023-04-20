@@ -1,41 +1,28 @@
 package com.example.gympti.login.Fragment
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.JsonRequest
-import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.gympti.R
-import com.example.gympti.StartFragment
-import com.example.gympti.databinding.ActivityMainBinding
 import com.example.gympti.databinding.FragmentLoginBinding
-import com.example.gympti.signup.Fragment.JoinIdFragment
-import com.google.gson.JsonObject
-import org.json.JSONException
 import org.json.JSONObject
-import com.example.gympti.login.Fragment.LoginFragment as LoginFragment1
+import java.security.MessageDigest
 
 
 class LoginFragment : Fragment() {
 
     private var mBinding: FragmentLoginBinding? = null
     private val binding get() = mBinding!!
+    var user = Array<String>(2,{""})
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,28 +44,23 @@ class LoginFragment : Fragment() {
 
             val id = binding.loginIdEdit.text.toString().trim()
             val pw = binding.loginPwEdit.text.toString().trim()
-            send()
 
-            //회원가입 때 받은 값 땡겨오기
-//            val sharedPreference = getSharedPreferences("signUp", 0)
-//            val haveID = sharedPreference.getString("id", "")
-//            val havePw = sharedPreference.getString("pw", "")
 
 
             if (id.isEmpty() == true || pw.isEmpty() == true){
                 Toast.makeText(context, "값을 입력해 주세요.", Toast.LENGTH_SHORT).show()
             }
             else {
-                Toast.makeText(context,"id : " +id,Toast.LENGTH_SHORT).show()
-                Toast.makeText(context,"pw : " +pw,Toast.LENGTH_SHORT).show()
+                user[0]=id
+                user[1]=pw
+                send()
             }
 
         }
     }
     private fun joinView() {
         binding.signUpBtn.setOnClickListener(){
-// 프래그 먼트 바꿔줌
-
+        // 프래그 먼트 바꿔줌
         }
     }
 
@@ -89,15 +71,12 @@ class LoginFragment : Fragment() {
 
     fun send() {
 
-        var url = "http://veryhotseo81.duckdns.org:8888/gympti/auth/register"
-        val email = binding.loginIdEdit.text.toString().trim()
+        var url = "http://veryhotseo81.duckdns.org:8888/gympti/auth/login"
 
-        var sendData = JSONObject("{\"email\":\""+email + "\"}")
-
-        sendData.put("userId", binding.loginIdEdit.text.toString().trim());
-        sendData.put("userName", "홍길동");
-        sendData.put("email", "jogayeon1214@naver.com");
-        sendData.put("password", binding.loginPwEdit.text.toString().trim());
+        var sendData = JSONObject()
+//
+        sendData.put("userId",user[0]);
+        sendData.put("password", user[1]);
 
 
         Log.d("LoginFragment", "sendData"+sendData)
@@ -106,16 +85,35 @@ class LoginFragment : Fragment() {
             url,
             sendData,
             Response.Listener{ response ->
-                try{
-                    Log.d("LoginFragment", response.toString());
-            } catch (e: JSONException){
-                e.printStackTrace()
+                Log.d("LoginFragment", response.toString());
+       }, Response.ErrorListener {
+                Log.d("LoginFragment", it.networkResponse.statusCode.toString())
+                var body = String(it.networkResponse.data, Charsets.UTF_8)
+                Log.d("LoginFragment", body)
+//                응답에서 status 코드 내놔
             }
-       }, Response.ErrorListener {  }
     )
 
         requestQueue?.add(request)
     }
+
+//    private fun getSHA512(str: String): String {
+//        var digest = MessageDigest.getInstance("SHA-512")
+//        var sha512bytes = digest.digest(str.toByteArray(Charsets.UTF_8))
+//
+//        return getHexToString(sha512bytes)
+//    }
+//
+//    private fun getHexToString(bArr : ByteArray) : String{
+//
+//        var str = ""
+//        str = bArr.map { Integer.toHexString(0xFF and it.toInt()) }
+//            .map { if (it.length<2) "0$it" else it}
+//            .fold("",{acc, d-> acc+d})
+//        return str.uppercase()
+//
+//
+//    }
 
 }
 

@@ -1,12 +1,9 @@
 package com.example.gympti
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import com.example.gympti.databinding.ActivityMainBinding
-import com.example.gympti.login.Fragment.LoginFragment
+import com.example.gympti.signup.Fragment.JoinFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private fun setFragment() {
         var trans = supportFragmentManager.beginTransaction()
 //        프래그머먼트 관리 라이브러리 / 프래그먼트 설정 변수에 담기
-        trans.add(R.id.frameLayout, LoginFragment())
+        trans.add(R.id.frameLayout, JoinFragment())
         trans.addToBackStack(null)
         trans.commit()
 //        이전화면 초기화
